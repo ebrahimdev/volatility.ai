@@ -10,7 +10,7 @@ class CreateStocks < ActiveRecord::Migration[8.0]
       t.integer :volume
 
       t.timestamps
-      t.index [:ticker, :date], unique: true
+      t.index [ :ticker, :date ], unique: true
       t.index :ticker
       t.index :date
     end

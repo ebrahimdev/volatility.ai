@@ -6,6 +6,4 @@ class Stock < ApplicationRecord
   validates :low, presence: true
   validates :close, presence: true
   validates :volume, presence: true
-
-  
 end
