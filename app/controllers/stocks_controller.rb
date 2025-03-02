@@ -1,6 +1,9 @@
 class StocksController < ApplicationController
   def show
-    binding.break
-    @stock = Stock.find(params[:id])
+    @stock = Stock.find_by(id: params[:id]) || Stock.last
+  end
+
+  def pull_stock_data
+    PullStockDataJob.perform_later(params[:ticker])
   end
 end
