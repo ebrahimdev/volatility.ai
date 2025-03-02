@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "stocks/show/:id" => "stocks#show", as: :stocks_show
+  get "stocks/show/:ticker" => "stocks#show", as: :stocks_show
   get "stocks/pull_stock_data/:ticker" => "stocks#pull_stock_data", as: :stocks_pull_stock_data
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

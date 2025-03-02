@@ -1,3 +1,27 @@
-<h1>Stocks#show</h1>
-<p>Find me in app/views/stocks/show.html.erb</p>
-<%= @stock.ticker %>
+<%= javascript_include_tag "https://cdn.plot.ly/plotly-2.24.1.min.js" %>
+
+<div id="stock-chart"></div>
+
+<%= javascript_tag do %>
+  const data = [{
+    x: <%= @stock_series.pluck(:date).to_json.html_safe %>,
+    y: <%= @stock_series.pluck(:close).to_json.html_safe %>,
+    type: 'scatter', 
+    mode: 'lines',
+    name: 'Close Price'
+  }];
+
+  const layout = {
+    title: '<%= @stock_series.first&.ticker %> Stock Price History',
+    xaxis: {
+      title: 'Date',
+      rangeslider: {}
+    },
+    yaxis: {
+      title: 'Price ($)'
+    }
+  };
+
+  Plotly.newPlot('stock-chart', data, layout);
+<% end %>
+
